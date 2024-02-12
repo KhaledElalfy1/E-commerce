@@ -6,4 +6,5 @@ class Routing {
   static const String completeProfile = '/completeProfile';
   static const String order = '/order';
   static const String profile = '/profile';
+  static const String successfulLogin = '/successfulLogin';
 }
