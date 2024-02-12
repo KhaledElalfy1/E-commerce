@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/routs/app_router.dart';
 import 'package:ecommerce/core/routs/routing.dart';
-import 'package:ecommerce/core/utils/constants.dart';
+import 'package:ecommerce/core/utils/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,14 +15,8 @@ class Tokoto extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-              scaffoldBackgroundColor: Colors.white,
-              fontFamily: 'Muli',
-              textTheme: const TextTheme(
-                bodyLarge: TextStyle(color: kTextColor),
-                bodyMedium: TextStyle(color: kTextColor),
-              )),
-          initialRoute: Routing.init,
+          theme: appTheme(),
+          initialRoute: Routing.login,
           onGenerateRoute: AppRouter().generateRoute,
         );
       },
