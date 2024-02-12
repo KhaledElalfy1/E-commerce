@@ -16,7 +16,7 @@ class Tokoto extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: appTheme(),
-          initialRoute: Routing.login,
+          initialRoute: Routing.init,
           onGenerateRoute: AppRouter().generateRoute,
         );
       },

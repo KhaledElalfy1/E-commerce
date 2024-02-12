@@ -3,6 +3,7 @@ import 'package:ecommerce/core/routs/routing.dart';
 import 'package:ecommerce/core/utils/constants.dart';
 import 'package:ecommerce/core/utils/fonts.dart';
 import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
+import 'package:ecommerce/core/widgets/dont_have_account.dart';
 import 'package:ecommerce/core/widgets/form_error.dart';
 import 'package:ecommerce/features/login/presentation/view/widgets/form_section.dart';
 import 'package:ecommerce/features/login/presentation/view/widgets/sign_in_container.dart';
@@ -75,9 +76,17 @@ class _LoginState extends State<Login> {
                     style: AppFonts.normal16Grey,
                   ),
                   const Spacer(),
-                  const Text(
-                    'Forgot Password?',
-                    style: TextStyle(decoration: TextDecoration.underline),
+                  TextButton(
+                    onPressed: () {
+                      context.pushNamed(Routing.forgetPassword);
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: kPrimaryColor,
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -109,25 +118,7 @@ class _LoginState extends State<Login> {
                   )
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: AppFonts.normal16Grey,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.pushNamed(Routing.signUp);
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style:
-                          AppFonts.normal16Grey.copyWith(color: kPrimaryColor),
-                    ),
-                  ),
-                ],
-              ),
+              const DontHaveAccountWidget()
             ],
           ),
         ),
