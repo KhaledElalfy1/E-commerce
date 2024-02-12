@@ -1,5 +1,6 @@
-import 'package:ecommerce/core/utils/constants.dart';
-import 'package:ecommerce/core/utils/fonts.dart';
+import 'package:ecommerce/core/helper/extentions.dart';
+import 'package:ecommerce/core/routs/routing.dart';
+import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/features/onboarding/data/model/onboarding_data.dart';
 import 'package:ecommerce/features/onboarding/presentation/cubit/indicator/indicator_cubit.dart';
 import 'package:ecommerce/features/onboarding/presentation/view/widgets/onboarding_content.dart';
@@ -59,19 +60,12 @@ class OnBoarding extends StatelessWidget {
                       },
                     ),
                     Gap(65.h),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          minimumSize: MaterialStatePropertyAll(
-                            Size(350.w, 65.h),
-                          ),
-                          backgroundColor:
-                              const MaterialStatePropertyAll(kPrimaryColor),
-                        ),
-                        child: Text(
-                          'Continuo',
-                          style: AppFonts.normal25White,
-                        ))
+                    CustomElevationButton(
+                      onPressed: () {
+                        context.pushNamed(Routing.login);
+                      },
+                      text: 'Continuo',
+                    ),
                   ],
                 ),
               )
