@@ -94,6 +94,7 @@ class _LoginState extends State<Login> {
               Gap(20.h),
               CustomElevationButton(
                 onPressed: () {
+                  setState(() {});
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     context.pushReplacementNamed(Routing.successfulLogin);
