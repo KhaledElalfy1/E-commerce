@@ -5,6 +5,7 @@ import 'package:ecommerce/features/no_routing/no_route.dart';
 import 'package:ecommerce/features/onboarding/presentation/cubit/indicator/indicator_cubit.dart';
 import 'package:ecommerce/features/onboarding/presentation/view/onboarding.dart';
 import 'package:ecommerce/features/sign_up/presentation/view/sign_up.dart';
+import 'package:ecommerce/features/successful_login/presentation/view/successful_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,9 +15,9 @@ class AppRouter {
     switch (settings.name) {
       case Routing.init:
         return MaterialPageRoute(
-          builder: (_) =>  BlocProvider(
+          builder: (_) => BlocProvider(
             create: (context) => IndicatorCubit(),
-            child:const OnBoarding(),
+            child: const OnBoarding(),
           ),
         );
 
@@ -33,6 +34,10 @@ class AppRouter {
       case Routing.signUp:
         return MaterialPageRoute(
           builder: (_) => const SignUp(),
+        );
+      case Routing.successfulLogin:
+        return MaterialPageRoute(
+          builder: (_) => const SuccessfulLogin(),
         );
 
       default:

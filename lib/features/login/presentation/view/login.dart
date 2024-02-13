@@ -96,6 +96,7 @@ class _LoginState extends State<Login> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    context.pushReplacementNamed(Routing.successfulLogin);
                   }
                 },
                 text: 'Continue',

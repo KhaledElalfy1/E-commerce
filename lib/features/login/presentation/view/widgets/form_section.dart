@@ -9,7 +9,8 @@ class FormSection extends StatefulWidget {
       {super.key,
       required this.emailController,
       required this.passwordController,
-      required this.formKey, required this.errors});
+      required this.formKey,
+      required this.errors});
   final TextEditingController emailController, passwordController;
   final GlobalKey<FormState> formKey;
   final List<String> errors;
@@ -47,11 +48,13 @@ class _FormSectionState extends State<FormSection> {
                 setState(() {
                   widget.errors.add(kEmailNullError);
                 });
+                return '';
               } else if (!emailValidatorRegExp.hasMatch(value) &&
                   !widget.errors.contains(kInvalidEmailError)) {
                 setState(() {
                   widget.errors.add(kInvalidEmailError);
                 });
+                return '';
               }
               return null;
             },
@@ -83,11 +86,13 @@ class _FormSectionState extends State<FormSection> {
                 setState(() {
                   widget.errors.add(kPassNullError);
                 });
+                return '';
               } else if (value.length < 8 &&
                   !widget.errors.contains(kShortPassError)) {
                 setState(() {
                   widget.errors.add(kShortPassError);
                 });
+                return '';
               }
               return null;
             },
