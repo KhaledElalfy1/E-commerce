@@ -15,7 +15,10 @@ class SignInContainer extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12.w, horizontal: 12.h),
         height: 50.h,
         width: 50.w,
-        decoration: const BoxDecoration(shape: BoxShape.circle),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xffF5F6F9),
+        ),
         child: SvgPicture.asset(iconPath),
       ),
     );

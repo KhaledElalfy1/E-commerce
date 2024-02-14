@@ -5,8 +5,8 @@ import 'package:ecommerce/core/utils/fonts.dart';
 import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/core/widgets/dont_have_account.dart';
 import 'package:ecommerce/core/widgets/form_error.dart';
+import 'package:ecommerce/core/widgets/sign_up_with_social.dart';
 import 'package:ecommerce/features/login/presentation/view/widgets/form_section.dart';
-import 'package:ecommerce/features/login/presentation/view/widgets/sign_in_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -103,23 +103,10 @@ class _LoginState extends State<Login> {
                 text: 'Continue',
               ),
               Gap(12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SignInContainer(
-                    iconPath: 'assets/icons/google-icon.svg',
-                    onTap: () {},
-                  ),
-                  SignInContainer(
-                    iconPath: 'assets/icons/facebook-2.svg',
-                    onTap: () {},
-                  ),
-                  SignInContainer(
-                    iconPath: 'assets/icons/twitter.svg',
-                    onTap: () {},
-                  )
-                ],
-              ),
+              SocialMediaSignUp(
+                  loginWithGoogle: () {},
+                  loginWithFaceBook: () {},
+                  loginWithTwitter: () {}),
               const DontHaveAccountWidget()
             ],
           ),
