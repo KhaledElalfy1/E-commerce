@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/login/presentation/view/widgets/sign_in_container.dart';
+import 'package:ecommerce/core/widgets/sign_in_container.dart';
 import 'package:flutter/material.dart';
 
 class SocialMediaSignUp extends StatelessWidget {
