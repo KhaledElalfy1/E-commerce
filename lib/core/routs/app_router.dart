@@ -1,9 +1,11 @@
 import 'package:ecommerce/core/routs/routing.dart';
+import 'package:ecommerce/features/complete_profile/presentation/view/complete_profile.dart';
 import 'package:ecommerce/features/forget_password/presentation/view/forget_password.dart';
 import 'package:ecommerce/features/login/presentation/view/login.dart';
 import 'package:ecommerce/features/no_routing/no_route.dart';
 import 'package:ecommerce/features/onboarding/presentation/cubit/indicator/indicator_cubit.dart';
 import 'package:ecommerce/features/onboarding/presentation/view/onboarding.dart';
+import 'package:ecommerce/features/otp/presentation/view/otp.dart';
 import 'package:ecommerce/features/sign_up/presentation/view/sign_up.dart';
 import 'package:ecommerce/features/successful_login/presentation/view/successful_login.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,14 @@ class AppRouter {
       case Routing.forgetPassword:
         return MaterialPageRoute(
           builder: (_) => const ForgetPassword(),
+        );
+      case Routing.completeProfile:
+        return MaterialPageRoute(
+          builder: (_) => const CompleteProfile(),
+        );
+      case Routing.otp:
+        return MaterialPageRoute(
+          builder: (_) => const OTP(),
         );
 
       case Routing.login:

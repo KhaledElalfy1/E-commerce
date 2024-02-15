@@ -1,5 +1,6 @@
 import 'package:ecommerce/core/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData appTheme() {
@@ -11,6 +12,9 @@ ThemeData appTheme() {
       bodyMedium: TextStyle(color: kTextColor),
     ),
     appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.white,
+          ),
       centerTitle: true,
       color: Colors.white,
       elevation: 0,
