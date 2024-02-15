@@ -33,7 +33,7 @@ class AppRouter {
         );
       case Routing.otp:
         return MaterialPageRoute(
-          builder: (_) => const OTP(),
+          builder: (_) =>  OTP(phoneNumber: argument as String),
         );
 
       case Routing.login:

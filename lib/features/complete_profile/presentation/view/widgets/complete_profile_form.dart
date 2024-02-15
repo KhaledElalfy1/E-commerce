@@ -63,7 +63,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           CustomElevationButton(
             onPressed: () {
               if (globalKey.currentState!.validate()) {
-                context.pushNamed(Routing.otp);
+                context.pushNamed(Routing.otp,argument: phoneNameController.text);
               }
             },
             text: 'Continue',
