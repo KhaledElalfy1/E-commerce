@@ -12,9 +12,9 @@ class AppFonts {
     color: Colors.black,
     fontWeight: FontWeight.normal,
   );
-  static TextStyle normal25White = const TextStyle(
+  static TextStyle normal22White = const TextStyle(
     color: Colors.white,
-    fontSize: 25,
+    fontSize: 22,
   );
 
   static TextStyle bold32Black = const TextStyle(

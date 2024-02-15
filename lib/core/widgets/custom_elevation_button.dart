@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomElevationButton extends StatelessWidget {
   const CustomElevationButton({
-    super.key, this.onPressed, required this.text,
+    super.key,
+    this.onPressed,
+    required this.text,
   });
   final void Function()? onPressed;
   final String text;
@@ -15,13 +17,18 @@ class CustomElevationButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         minimumSize: MaterialStatePropertyAll(
-          Size(350.w, 65.h),
+          Size(350.w, 50.h),
         ),
         backgroundColor: const MaterialStatePropertyAll(kPrimaryColor),
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+        ),
       ),
       child: Text(
         text,
-        style: AppFonts.normal25White,
+        style: AppFonts.normal22White,
       ),
     );
   }

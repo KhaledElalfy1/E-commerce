@@ -7,4 +7,5 @@ class Routing {
   static const String order = '/order';
   static const String profile = '/profile';
   static const String successfulLogin = '/successfulLogin';
+  static const String otp = '/otp';
 }

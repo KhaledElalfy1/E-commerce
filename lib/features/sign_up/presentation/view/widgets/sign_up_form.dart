@@ -1,3 +1,5 @@
+import 'package:ecommerce/core/helper/extentions.dart';
+import 'package:ecommerce/core/routs/routing.dart';
 import 'package:ecommerce/core/utils/constants.dart';
 import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/core/widgets/custom_text_form_filed.dart';
@@ -39,7 +41,7 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () {
               if (globalKey.currentState!.validate()) {
                 // goto profile page
-                print('object');
+                context.pushNamed(Routing.completeProfile);
               }
             },
             text: 'Continue',
