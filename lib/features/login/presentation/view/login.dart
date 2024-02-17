@@ -13,19 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   const Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  final formKey = GlobalKey<FormState>();
-  List<String> errors = [];
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool rememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,21 +47,17 @@ class _LoginState extends State<Login> {
                 textAlign: TextAlign.center,
               ),
               Gap(60.h),
-              FormSection(
-                  emailController: emailController,
-                  passwordController: passwordController,
-                  formKey: formKey,
-                  errors: errors),
+              const FormSection(),
               Gap(20.h),
               Row(
                 children: [
                   BlocBuilder<LoginCubit, LoginState>(
                     builder: (context, state) {
                       return Checkbox(
-                          value:  BlocProvider.of<LoginCubit>(context).rememberMe,
+                          value: LoginCubit.get(context).rememberMe,
                           activeColor: kPrimaryColor,
                           onChanged: (value) {
-                            BlocProvider.of<LoginCubit>(context).remember();
+                            LoginCubit.get(context).remember();
                           });
                     },
                   ),
@@ -94,13 +80,19 @@ class _LoginState extends State<Login> {
                   )
                 ],
               ),
-              FormErrors(errors: errors),
+              BlocBuilder<LoginCubit, LoginState>(
+                builder: (context, state) {
+                  return FormErrors(errors: LoginCubit.get(context).errors);
+                },
+              ),
               Gap(20.h),
               CustomElevationButton(
                 onPressed: () {
-                  setState(() {});
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
+                  if (LoginCubit.get(context)
+                      .formKey
+                      .currentState!
+                      .validate()) {
+                    LoginCubit.get(context).formKey.currentState!.save();
                     context.pushReplacementNamed(Routing.successfulLogin);
                   }
                 },

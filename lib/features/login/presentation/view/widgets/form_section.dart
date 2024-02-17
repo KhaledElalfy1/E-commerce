@@ -1,59 +1,50 @@
 import 'package:ecommerce/core/utils/constants.dart';
 import 'package:ecommerce/core/widgets/custom_text_form_filed.dart';
+import 'package:ecommerce/features/login/presentation/controller/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class FormSection extends StatefulWidget {
-  const FormSection(
-      {super.key,
-      required this.emailController,
-      required this.passwordController,
-      required this.formKey,
-      required this.errors});
-  final TextEditingController emailController, passwordController;
-  final GlobalKey<FormState> formKey;
-  final List<String> errors;
+class FormSection extends StatelessWidget {
+  const FormSection({
+    super.key,
+  });
 
-  @override
-  State<FormSection> createState() => _FormSectionState();
-}
-
-class _FormSectionState extends State<FormSection> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.formKey,
+      key: LoginCubit.get(context).formKey,
       child: Column(
         children: [
           CustomTextFormFiled(
-            textEditingController: widget.emailController,
+            textEditingController: LoginCubit.get(context).emailController,
             onChanged: (value) {
-              if (value.isNotEmpty && widget.errors.contains(kEmailNullError)) {
-                // TODO state mangment
-                setState(() {
-                  widget.errors.remove(kEmailNullError);
-                });
+              if (value.isNotEmpty &&
+                  LoginCubit.get(context).errors.contains(kEmailNullError)) {
+                LoginCubit.get(context).removeError(kEmailNullError);
               } else if (emailValidatorRegExp.hasMatch(value) &&
-                  widget.errors.contains(kInvalidEmailError)) {
-                setState(() {
-                  widget.errors.remove(kInvalidEmailError);
-                });
+                  LoginCubit.get(context).errors.contains(kInvalidEmailError)) {
+                LoginCubit.get(context).removeError(kInvalidEmailError);
+                // setState(() {
+                //    LoginCubit.get(context).errors.remove(kInvalidEmailError);
+                // });
               }
               return null;
             },
             validator: (value) {
-              if (value!.isEmpty && !widget.errors.contains(kEmailNullError)) {
-                // TODO state mangment
-                setState(() {
-                  widget.errors.add(kEmailNullError);
-                });
+              if (value!.isEmpty &&
+                  !LoginCubit.get(context).errors.contains(kEmailNullError)) {
+                LoginCubit.get(context).addErrorToList(kEmailNullError);
+
                 return '';
               } else if (!emailValidatorRegExp.hasMatch(value) &&
-                  !widget.errors.contains(kInvalidEmailError)) {
-                setState(() {
-                  widget.errors.add(kInvalidEmailError);
-                });
+                  !LoginCubit.get(context)
+                      .errors
+                      .contains(kInvalidEmailError)) {
+                LoginCubit.get(context).addErrorToList(kInvalidEmailError);
+                // setState(() {
+                //    LoginCubit.get(context).errors.add(kInvalidEmailError);
+                // });
                 return '';
               }
               return null;
@@ -65,33 +56,33 @@ class _FormSectionState extends State<FormSection> {
           ),
           Gap(30.h),
           CustomTextFormFiled(
-            textEditingController: widget.passwordController,
+            textEditingController: LoginCubit.get(context).passwordController,
             onChanged: (value) {
-              if (value.isNotEmpty && !widget.errors.contains(kPassNullError)) {
+              if (value.isNotEmpty &&
+                  !LoginCubit.get(context).errors.contains(kPassNullError)) {
                 // TODO state mangment
-                setState(() {
-                  widget.errors.remove(kPassNullError);
-                });
+                LoginCubit.get(context).removeError(kPassNullError);
+                // setState(() {
+                //    LoginCubit.get(context).errors.remove(kPassNullError);
+                // });
               } else if (value.length >= 8 &&
-                  widget.errors.contains(kShortPassError)) {
-                setState(() {
-                  widget.errors.remove(kShortPassError);
-                });
+                  LoginCubit.get(context).errors.contains(kShortPassError)) {
+                LoginCubit.get(context).removeError(kShortPassError);
               }
               return null;
             },
             validator: (value) {
-              if (value!.isEmpty && !widget.errors.contains(kPassNullError)) {
-                // TODO state mangment
-                setState(() {
-                  widget.errors.add(kPassNullError);
-                });
+              if (value!.isEmpty &&
+                  !LoginCubit.get(context).errors.contains(kPassNullError)) {
+                LoginCubit.get(context).addErrorToList(kPassNullError);
+
                 return '';
               } else if (value.length < 8 &&
-                  !widget.errors.contains(kShortPassError)) {
-                setState(() {
-                  widget.errors.add(kShortPassError);
-                });
+                  !LoginCubit.get(context).errors.contains(kShortPassError)) {
+                LoginCubit.get(context).addErrorToList(kShortPassError);
+                // setState(() {
+                //    LoginCubit.get(context).errors.add(kShortPassError);
+                // });
                 return '';
               }
               return null;

@@ -12,3 +12,5 @@ final class LoginSuccess extends LoginState {}
 final class LoginFailure extends LoginState {}
 
 final class LoginRemember extends LoginState {}
+
+final class LoginUpdateList extends LoginState {}
