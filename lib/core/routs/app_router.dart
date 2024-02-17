@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/routs/routing.dart';
 import 'package:ecommerce/features/complete_profile/presentation/view/complete_profile.dart';
 import 'package:ecommerce/features/forget_password/presentation/view/forget_password.dart';
+import 'package:ecommerce/features/login/presentation/controller/cubit/login_cubit.dart';
 import 'package:ecommerce/features/login/presentation/view/login.dart';
 import 'package:ecommerce/features/no_routing/no_route.dart';
 import 'package:ecommerce/features/onboarding/presentation/cubit/indicator/indicator_cubit.dart';
@@ -33,12 +34,15 @@ class AppRouter {
         );
       case Routing.otp:
         return MaterialPageRoute(
-          builder: (_) =>  OTP(phoneNumber: argument as String),
+          builder: (_) => OTP(phoneNumber: argument as String),
         );
 
       case Routing.login:
         return MaterialPageRoute(
-          builder: (_) => const Login(),
+          builder: (_) => BlocProvider(
+            create: (context) => LoginCubit(),
+            child: const Login(),
+          ),
         );
 
       case Routing.signUp:

@@ -6,24 +6,16 @@ import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/core/widgets/dont_have_account.dart';
 import 'package:ecommerce/core/widgets/form_error.dart';
 import 'package:ecommerce/core/widgets/sign_up_with_social.dart';
+import 'package:ecommerce/features/login/presentation/controller/cubit/login_cubit.dart';
 import 'package:ecommerce/features/login/presentation/view/widgets/form_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   const Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  final formKey = GlobalKey<FormState>();
-  List<String> errors = [];
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool rememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,22 +47,20 @@ class _LoginState extends State<Login> {
                 textAlign: TextAlign.center,
               ),
               Gap(60.h),
-              FormSection(
-                  emailController: emailController,
-                  passwordController: passwordController,
-                  formKey: formKey,
-                  errors: errors),
+              const FormSection(),
               Gap(20.h),
               Row(
                 children: [
-                  Checkbox(
-                      value: rememberMe,
-                      activeColor: kPrimaryColor,
-                      onChanged: (value) {
-                        setState(() {
-                          rememberMe = value!;
-                        });
-                      }),
+                  BlocBuilder<LoginCubit, LoginState>(
+                    builder: (context, state) {
+                      return Checkbox(
+                          value: LoginCubit.get(context).rememberMe,
+                          activeColor: kPrimaryColor,
+                          onChanged: (value) {
+                            LoginCubit.get(context).remember();
+                          });
+                    },
+                  ),
                   Text(
                     'Remember me',
                     style: AppFonts.normal16Grey,
@@ -90,13 +80,19 @@ class _LoginState extends State<Login> {
                   )
                 ],
               ),
-              FormErrors(errors: errors),
+              BlocBuilder<LoginCubit, LoginState>(
+                builder: (context, state) {
+                  return FormErrors(errors: LoginCubit.get(context).errors);
+                },
+              ),
               Gap(20.h),
               CustomElevationButton(
                 onPressed: () {
-                  setState(() {});
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
+                  if (LoginCubit.get(context)
+                      .formKey
+                      .currentState!
+                      .validate()) {
+                    LoginCubit.get(context).formKey.currentState!.save();
                     context.pushReplacementNamed(Routing.successfulLogin);
                   }
                 },
