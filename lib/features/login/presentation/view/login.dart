@@ -6,8 +6,10 @@ import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/core/widgets/dont_have_account.dart';
 import 'package:ecommerce/core/widgets/form_error.dart';
 import 'package:ecommerce/core/widgets/sign_up_with_social.dart';
+import 'package:ecommerce/features/login/presentation/controller/cubit/login_cubit.dart';
 import 'package:ecommerce/features/login/presentation/view/widgets/form_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
@@ -63,14 +65,16 @@ class _LoginState extends State<Login> {
               Gap(20.h),
               Row(
                 children: [
-                  Checkbox(
-                      value: rememberMe,
-                      activeColor: kPrimaryColor,
-                      onChanged: (value) {
-                        setState(() {
-                          rememberMe = value!;
-                        });
-                      }),
+                  BlocBuilder<LoginCubit, LoginState>(
+                    builder: (context, state) {
+                      return Checkbox(
+                          value:  BlocProvider.of<LoginCubit>(context).rememberMe,
+                          activeColor: kPrimaryColor,
+                          onChanged: (value) {
+                            BlocProvider.of<LoginCubit>(context).remember();
+                          });
+                    },
+                  ),
                   Text(
                     'Remember me',
                     style: AppFonts.normal16Grey,
