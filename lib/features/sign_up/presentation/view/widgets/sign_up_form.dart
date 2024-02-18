@@ -4,42 +4,38 @@ import 'package:ecommerce/core/utils/constants.dart';
 import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/core/widgets/custom_text_form_filed.dart';
 import 'package:ecommerce/core/widgets/form_error.dart';
+import 'package:ecommerce/features/sign_up/presentation/controller/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class SignUpForm extends StatefulWidget {
+class SignUpForm extends StatelessWidget {
   const SignUpForm({
     super.key,
   });
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
-  final GlobalKey<FormState> globalKey = GlobalKey();
-  final TextEditingController emailController = TextEditingController(),
-      passwordController = TextEditingController(),
-      confirmPasswordController = TextEditingController();
-  List<String> errors = [];
-  @override
   Widget build(BuildContext context) {
     return Form(
-      key: globalKey,
+      key: SignUpCubit.get(context).globalKey,
       child: Column(
         children: [
-          buildEmailTextFormFiled(),
+          buildEmailTextFormFiled(context),
           Gap(15.h),
-          buildPasswordTextFormFiled(),
+          buildPasswordTextFormFiled(context),
           Gap(15.h),
-          buildConfirmPasswordTextFormFiled(),
+          buildConfirmPasswordTextFormFiled(context),
           Gap(30.h),
-          FormErrors(errors: errors),
+          BlocBuilder<SignUpCubit, SignUpState>(
+            builder: (context, state) {
+              return FormErrors(errors: SignUpCubit.get(context).errors);
+            },
+          ),
           Gap(5.h),
           CustomElevationButton(
             onPressed: () {
-              if (globalKey.currentState!.validate()) {
+              if (SignUpCubit.get(context).globalKey.currentState!.validate()) {
                 // goto profile page
                 context.pushNamed(Routing.completeProfile);
               }
@@ -51,25 +47,23 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  CustomTextFormFiled buildConfirmPasswordTextFormFiled() {
+  CustomTextFormFiled buildConfirmPasswordTextFormFiled(BuildContext context) {
     return CustomTextFormFiled(
-      textEditingController: confirmPasswordController,
+      textEditingController: SignUpCubit.get(context).confirmPasswordController,
       onChanged: (value) {
-        if (passwordController.text == confirmPasswordController.text) {
-          // TODO state mangment
-          setState(() {
-            errors.remove(kMatchPassError);
-          });
+        if (SignUpCubit.get(context).passwordController.text ==
+            SignUpCubit.get(context).confirmPasswordController.text) {
+          SignUpCubit.get(context).removeError(kMatchPassError);
         }
         return null;
       },
       validator: (value) {
         if (value!.isEmpty) {
           return '';
-        } else if (passwordController.text != confirmPasswordController.text) {
-          setState(() {
-            errors.add(kMatchPassError);
-          });
+        } else if (SignUpCubit.get(context).passwordController.text !=
+            SignUpCubit.get(context).confirmPasswordController.text) {
+          SignUpCubit.get(context).addErrorToList(kMatchPassError);
+
           return '';
         }
         return null;
@@ -81,33 +75,29 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  CustomTextFormFiled buildPasswordTextFormFiled() {
+  CustomTextFormFiled buildPasswordTextFormFiled(BuildContext context) {
     return CustomTextFormFiled(
-      textEditingController: passwordController,
+      textEditingController: SignUpCubit.get(context).passwordController,
       onChanged: (value) {
-        if (value.isNotEmpty && !errors.contains(kPassNullError)) {
-          // TODO state mangment
-          setState(() {
-            errors.remove(kPassNullError);
-          });
-        } else if (value.length >= 8 && errors.contains(kShortPassError)) {
-          setState(() {
-            errors.remove(kShortPassError);
-          });
+        if (value.isNotEmpty &&
+            !SignUpCubit.get(context).errors.contains(kPassNullError)) {
+          SignUpCubit.get(context).removeError(kPassNullError);
+        } else if (value.length >= 8 &&
+            SignUpCubit.get(context).errors.contains(kShortPassError)) {
+          SignUpCubit.get(context).removeError(kShortPassError);
         }
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty && !errors.contains(kPassNullError)) {
-          // TODO state mangment
-          setState(() {
-            errors.add(kPassNullError);
-          });
+        if (value!.isEmpty &&
+            !SignUpCubit.get(context).errors.contains(kPassNullError)) {
+          SignUpCubit.get(context).addErrorToList(kPassNullError);
+
           return '';
-        } else if (value.length < 8 && !errors.contains(kShortPassError)) {
-          setState(() {
-            errors.add(kShortPassError);
-          });
+        } else if (value.length < 8 &&
+            !SignUpCubit.get(context).errors.contains(kShortPassError)) {
+          SignUpCubit.get(context).addErrorToList(kShortPassError);
+
           return '';
         }
         return null;
@@ -119,35 +109,29 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  CustomTextFormFiled buildEmailTextFormFiled() {
+  CustomTextFormFiled buildEmailTextFormFiled(BuildContext context) {
     return CustomTextFormFiled(
-      textEditingController: emailController,
+      textEditingController: SignUpCubit.get(context).emailController,
       onChanged: (value) {
-        if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-          // TODO state mangment
-          setState(() {
-            errors.remove(kEmailNullError);
-          });
+        if (value.isNotEmpty &&
+            SignUpCubit.get(context).errors.contains(kEmailNullError)) {
+          SignUpCubit.get(context).removeError(kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value) &&
-            errors.contains(kInvalidEmailError)) {
-          setState(() {
-            errors.remove(kInvalidEmailError);
-          });
+            SignUpCubit.get(context).errors.contains(kInvalidEmailError)) {
+          SignUpCubit.get(context).removeError(kInvalidEmailError);
         }
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty && !errors.contains(kEmailNullError)) {
-          // TODO state mangment
-          setState(() {
-            errors.add(kEmailNullError);
-          });
+        if (value!.isEmpty &&
+            !SignUpCubit.get(context).errors.contains(kEmailNullError)) {
+          SignUpCubit.get(context).addErrorToList(kEmailNullError);
+
           return '';
         } else if (!emailValidatorRegExp.hasMatch(value) &&
-            !errors.contains(kInvalidEmailError)) {
-          setState(() {
-            errors.add(kInvalidEmailError);
-          });
+            !SignUpCubit.get(context).errors.contains(kInvalidEmailError)) {
+          SignUpCubit.get(context).addErrorToList(kInvalidEmailError);
+
           return '';
         }
         return null;

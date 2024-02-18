@@ -25,9 +25,7 @@ class FormSection extends StatelessWidget {
               } else if (emailValidatorRegExp.hasMatch(value) &&
                   LoginCubit.get(context).errors.contains(kInvalidEmailError)) {
                 LoginCubit.get(context).removeError(kInvalidEmailError);
-                // setState(() {
-                //    LoginCubit.get(context).errors.remove(kInvalidEmailError);
-                // });
+                
               }
               return null;
             },
@@ -42,9 +40,7 @@ class FormSection extends StatelessWidget {
                       .errors
                       .contains(kInvalidEmailError)) {
                 LoginCubit.get(context).addErrorToList(kInvalidEmailError);
-                // setState(() {
-                //    LoginCubit.get(context).errors.add(kInvalidEmailError);
-                // });
+                
                 return '';
               }
               return null;
@@ -60,11 +56,9 @@ class FormSection extends StatelessWidget {
             onChanged: (value) {
               if (value.isNotEmpty &&
                   !LoginCubit.get(context).errors.contains(kPassNullError)) {
-                // TODO state mangment
+                
                 LoginCubit.get(context).removeError(kPassNullError);
-                // setState(() {
-                //    LoginCubit.get(context).errors.remove(kPassNullError);
-                // });
+                
               } else if (value.length >= 8 &&
                   LoginCubit.get(context).errors.contains(kShortPassError)) {
                 LoginCubit.get(context).removeError(kShortPassError);
@@ -80,9 +74,7 @@ class FormSection extends StatelessWidget {
               } else if (value.length < 8 &&
                   !LoginCubit.get(context).errors.contains(kShortPassError)) {
                 LoginCubit.get(context).addErrorToList(kShortPassError);
-                // setState(() {
-                //    LoginCubit.get(context).errors.add(kShortPassError);
-                // });
+                
                 return '';
               }
               return null;
