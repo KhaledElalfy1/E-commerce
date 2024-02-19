@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/routs/routing.dart';
 import 'package:ecommerce/features/complete_profile/presentation/controller/cubit/complete_profile_cubit.dart';
 import 'package:ecommerce/features/complete_profile/presentation/view/complete_profile.dart';
+import 'package:ecommerce/features/forget_password/presentation/controller/cubit/forget_password_cubit.dart';
 import 'package:ecommerce/features/forget_password/presentation/view/forget_password.dart';
 import 'package:ecommerce/features/login/presentation/controller/cubit/login_cubit.dart';
 import 'package:ecommerce/features/login/presentation/view/login.dart';
@@ -28,13 +29,16 @@ class AppRouter {
 
       case Routing.forgetPassword:
         return MaterialPageRoute(
-          builder: (_) => const ForgetPassword(),
+          builder: (_) =>  BlocProvider(
+            create: (context) => ForgetPasswordCubit(),
+            child:const ForgetPassword(),
+          ),
         );
       case Routing.completeProfile:
         return MaterialPageRoute(
-          builder: (_) =>  BlocProvider(
+          builder: (_) => BlocProvider(
             create: (context) => CompleteProfileCubit(),
-            child:const CompleteProfile(),
+            child: const CompleteProfile(),
           ),
         );
       case Routing.otp:

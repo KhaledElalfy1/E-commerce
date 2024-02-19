@@ -1,26 +1,18 @@
-
 import 'package:ecommerce/core/utils/constants.dart';
 import 'package:ecommerce/core/utils/fonts.dart';
 import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:ecommerce/core/widgets/custom_text_form_filed.dart';
 import 'package:ecommerce/core/widgets/dont_have_account.dart';
 import 'package:ecommerce/core/widgets/form_error.dart';
+import 'package:ecommerce/features/forget_password/presentation/controller/cubit/forget_password_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class ForgetPassword extends StatefulWidget {
+class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
-  @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
-}
-
-final TextEditingController emailController = TextEditingController();
-GlobalKey<FormState> globalKey = GlobalKey();
-List<String> errors = [];
-
-class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,34 +40,41 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ),
               Gap(MediaQuery.of(context).size.height * .15),
               Form(
-                key: globalKey,
+                key: ForgetPasswordCubit.get(context).globalKey,
                 child: CustomTextFormFiled(
-                  textEditingController: emailController,
+                  textEditingController:
+                      ForgetPasswordCubit.get(context).emailController,
                   onChanged: (value) {
-                    if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-                      // TODO state mangment
-                      setState(() {
-                        errors.remove(kEmailNullError);
-                      });
+                    if (value.isNotEmpty &&
+                        ForgetPasswordCubit.get(context)
+                            .errors
+                            .contains(kEmailNullError)) {
+                      ForgetPasswordCubit.get(context)
+                          .removeError(kEmailNullError);
                     } else if (emailValidatorRegExp.hasMatch(value) &&
-                        errors.contains(kInvalidEmailError)) {
-                      setState(() {
-                        errors.remove(kInvalidEmailError);
-                      });
+                        ForgetPasswordCubit.get(context)
+                            .errors
+                            .contains(kInvalidEmailError)) {
+                      ForgetPasswordCubit.get(context)
+                          .removeError(kInvalidEmailError);
                     }
                     return null;
                   },
                   validator: (value) {
-                    if (value!.isEmpty && !errors.contains(kEmailNullError)) {
-                      // TODO state mangment
-                      setState(() {
-                        errors.add(kEmailNullError);
-                      });
+                    if (value!.isEmpty &&
+                        !ForgetPasswordCubit.get(context)
+                            .errors
+                            .contains(kEmailNullError)) {
+                      ForgetPasswordCubit.get(context)
+                          .addErrorToList(kEmailNullError);
+                      return '';
                     } else if (!emailValidatorRegExp.hasMatch(value) &&
-                        !errors.contains(kInvalidEmailError)) {
-                      setState(() {
-                        errors.add(kInvalidEmailError);
-                      });
+                        !ForgetPasswordCubit.get(context)
+                            .errors
+                            .contains(kInvalidEmailError)) {
+                      ForgetPasswordCubit.get(context)
+                          .addErrorToList(kInvalidEmailError);
+                      return '';
                     }
                     return null;
                   },
@@ -85,12 +84,23 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   keyboardType: TextInputType.emailAddress,
                 ),
               ),
-              FormErrors(errors: errors),
+              BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+                builder: (context, state) {
+                  return FormErrors(
+                      errors: ForgetPasswordCubit.get(context).errors);
+                },
+              ),
               Gap(100.h),
               CustomElevationButton(
                   onPressed: () {
-                    if (globalKey.currentState!.validate()) {
-                      globalKey.currentState!.save();
+                    if (ForgetPasswordCubit.get(context)
+                        .globalKey
+                        .currentState!
+                        .validate()) {
+                      ForgetPasswordCubit.get(context)
+                          .globalKey
+                          .currentState!
+                          .save();
                     }
                   },
                   text: "Continuo"),
@@ -103,4 +113,3 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     );
   }
 }
-
