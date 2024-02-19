@@ -72,6 +72,7 @@ class SignUpForm extends StatelessWidget {
       label: 'Confirm Password',
       iconPath: 'assets/icons/Lock.svg',
       obscureText: true,
+      keyboardType: TextInputType.number,
     );
   }
 
@@ -106,6 +107,7 @@ class SignUpForm extends StatelessWidget {
       label: 'Password',
       iconPath: 'assets/icons/Lock.svg',
       obscureText: true,
+      keyboardType: TextInputType.number,
     );
   }
 
