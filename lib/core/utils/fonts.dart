@@ -16,11 +16,25 @@ class AppFonts {
     color: Colors.white,
     fontSize: 22,
   );
+  static TextStyle bold24White = const TextStyle(
+    color: Colors.white,
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle normal16White = const TextStyle(
+    color: Colors.white,
+    fontSize: 16,
+  );
 
   static TextStyle bold32Black = const TextStyle(
     color: Colors.black,
     fontSize: 30,
     fontWeight: FontWeight.bold,
+  );
+  static TextStyle semiBold24Black = const TextStyle(
+    color: Colors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
   );
 
   static TextStyle normal20Grey = const TextStyle(

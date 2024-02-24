@@ -3,6 +3,7 @@ import 'package:ecommerce/features/complete_profile/presentation/controller/cubi
 import 'package:ecommerce/features/complete_profile/presentation/view/complete_profile.dart';
 import 'package:ecommerce/features/forget_password/presentation/controller/cubit/forget_password_cubit.dart';
 import 'package:ecommerce/features/forget_password/presentation/view/forget_password.dart';
+import 'package:ecommerce/features/home/presentation/view/home.dart';
 import 'package:ecommerce/features/login/presentation/controller/cubit/login_cubit.dart';
 import 'package:ecommerce/features/login/presentation/view/login.dart';
 import 'package:ecommerce/features/no_routing/no_route.dart';
@@ -44,6 +45,10 @@ class AppRouter {
       case Routing.otp:
         return MaterialPageRoute(
           builder: (_) => OTP(phoneNumber: argument as String),
+        );
+      case Routing.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) =>const HomeScreen(),
         );
 
       case Routing.login:
