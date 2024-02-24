@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/home/presentation/view/widgets/app_bar_section.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,8 +6,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          children: [
+            AppBarSection(
+              cardOnTap: () {},
+              notificationOnTap: () {},
+            )
+          ],
+        ),
+      ),
     );
   }
 }
