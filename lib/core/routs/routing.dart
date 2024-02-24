@@ -8,4 +8,5 @@ class Routing {
   static const String profile = '/profile';
   static const String successfulLogin = '/successfulLogin';
   static const String otp = '/otp';
+  static const String homeScreen = '/homeScreen';
 }

@@ -1,3 +1,5 @@
+import 'package:ecommerce/core/helper/extentions.dart';
+import 'package:ecommerce/core/routs/routing.dart';
 import 'package:ecommerce/core/utils/fonts.dart';
 import 'package:ecommerce/core/widgets/custom_elevation_button.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +28,11 @@ class SuccessfulLogin extends StatelessWidget {
           Gap(MediaQuery.of(context).size.height * .1),
           SizedBox(
             width: 240.w,
-            child:
-                CustomElevationButton(onPressed: () {}, text: 'Back To Home'),
+            child: CustomElevationButton(
+                onPressed: () {
+                  context.pushReplacementNamed(Routing.homeScreen);
+                },
+                text: 'Back To Home'),
           ),
         ],
       ),
