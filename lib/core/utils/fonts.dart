@@ -25,6 +25,11 @@ class AppFonts {
     color: Colors.white,
     fontSize: 16,
   );
+  static TextStyle semiBold18White = const TextStyle(
+    color: Colors.white,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+  );
 
   static TextStyle bold32Black = const TextStyle(
     color: Colors.black,

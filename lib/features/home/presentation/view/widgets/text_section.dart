@@ -2,12 +2,12 @@ import 'package:ecommerce/core/utils/fonts.dart';
 import 'package:flutter/material.dart';
 
 class TextSection extends StatelessWidget {
-  const TextSection(
-      {super.key,
-      required this.prefixText,
-      required this.suffixText,
-      this.onPressed});
-  final String prefixText, suffixText;
+  const TextSection({
+    super.key,
+    required this.prefixText,
+    this.onPressed,
+  });
+  final String prefixText;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class TextSection extends StatelessWidget {
         TextButton(
           onPressed: onPressed,
           child: Text(
-            suffixText,
+            'See More',
             style: AppFonts.normal16Grey,
           ),
         ),
