@@ -1,9 +1,9 @@
-import 'package:ecommerce/features/home/presentation/view/category_section.dart';
+import 'package:ecommerce/features/home/presentation/view/widgets/category_section.dart';
 import 'package:ecommerce/features/home/presentation/view/widgets/app_bar_section.dart';
 import 'package:ecommerce/features/home/presentation/view/widgets/banner_section.dart';
 import 'package:ecommerce/features/home/presentation/view/widgets/discount_banner.dart';
+import 'package:ecommerce/features/home/presentation/view/widgets/product_section.dart';
 import 'package:ecommerce/features/home/presentation/view/widgets/text_section.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -36,7 +36,11 @@ class HomeScreen extends StatelessWidget {
               ),
               Gap(16.h),
               const BannerSection(),
-              const TextSection(prefixText: 'Popular Product')
+              TextSection(
+                prefixText: 'Popular Product',
+                onPressed: () {},
+              ),
+              const ProductSection(),
             ],
           ),
         ),
