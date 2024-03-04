@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/model/product_model.dart';
 import 'package:ecommerce/core/routs/routing.dart';
 import 'package:ecommerce/features/complete_profile/presentation/controller/cubit/complete_profile_cubit.dart';
 import 'package:ecommerce/features/complete_profile/presentation/view/complete_profile.dart';
@@ -53,7 +54,7 @@ class AppRouter {
         );
       case Routing.detailsScreen:
         return MaterialPageRoute(
-          builder: (_) => const DetailsScreen(),
+          builder: (_) =>  DetailsScreen(productModel: argument as ProductModel,),
         );
       case Routing.login:
         return MaterialPageRoute(

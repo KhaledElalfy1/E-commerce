@@ -15,7 +15,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(Routing.detailsScreen);
+        context.pushNamed(Routing.detailsScreen,argument: productModel);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
