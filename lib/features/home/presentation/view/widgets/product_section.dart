@@ -15,8 +15,9 @@ class ProductSection extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const ProductItem(
+          return ProductItem(
             imagePath: 'assets/images/ps4_console_blue_1.png',
+            price: index,
           );
         },
         separatorBuilder: (context, index) => Gap(10.w),

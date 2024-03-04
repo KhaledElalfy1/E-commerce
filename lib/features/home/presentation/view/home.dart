@@ -6,7 +6,6 @@ import 'package:ecommerce/features/home/presentation/view/widgets/product_sectio
 import 'package:ecommerce/features/home/presentation/view/widgets/text_section.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
