@@ -9,4 +9,5 @@ class Routing {
   static const String successfulLogin = '/successfulLogin';
   static const String otp = '/otp';
   static const String homeScreen = '/homeScreen';
+  static const String detailsScreen = '/detailsScreen';
 }
